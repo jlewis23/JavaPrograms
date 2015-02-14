@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+/**     
+ *    
+ * @author Jeremy Lewis    
+ * @version 1.0  
+ * Course : ITEC 2150 Spring 2013    
+ * Written: April 2, 2013  
+ * Homework 5
+ * 
+ * This class talks about the video description (title, release date, and catalog number)
+ */
+
+public class VideoDescription 
+{
+	private String title;
+	private String catalogNumb;
+	private String releaseDate;	
+	
+	public VideoDescription(String title, String releaseDate, String catalogNumb)
+	{
+		this.title = title;
+		this.catalogNumb = catalogNumb;
+		this.releaseDate = releaseDate;
+	}
+	  
+	public void process(Scanner in)
+	{
+		String name = in.next();
+		Integer yearCat = in.nextInt();
+		String catNumb = in.next();
+		while (name != catNumb)
+		{ 
+			System.out.print(name + " " + yearCat + " " + catNumb);
+		}
+	}
+	
+	public String getTitle()
+	{
+		return title; 
+	}
+	  
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+	  
+	public String getCatalogNumb()
+	{
+		return catalogNumb; 
+	}
+	
+	public void setCatalogNumb(String catalogNumb)
+	{
+		this.catalogNumb = catalogNumb;
+	}
+	
+	public String getReleaseDate()
+	{
+		return releaseDate; 
+	}
+	
+	public void setReleaseDate(String releaseDate)
+	{
+		this.releaseDate = releaseDate;
+	}
+}

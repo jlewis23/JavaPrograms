@@ -1,0 +1,109 @@
+/**
+ * @author Ruben Mendez
+ * @version 1.0
+ * Course : ITEC 2150 Spring 2013
+ * Written: March 19, 2013
+ *
+ *
+ * This class will create a try catch that only allow the user to reverse a file and check if it has been reversed
+ * Purpose is to reverse an entire file.
+ * 
+ * credit to Erick Boyso and Ose Abunaw for helping me work on it.
+ * 
+ */
+
+import java.io.FileReader;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class ReverseFile
+{
+	//stores the name of the file you want reversed.
+	public static void main(String[] args) throws IOException
+	{
+		ArrayList<String> text = new ArrayList<String>();
+		Scanner console = new Scanner(System.in);
+		FileReader reader = null;
+		PrintWriter out = null;
+
+
+		/*
+		 * creates a try catch that asks you for Input and output file names
+		 */
+		try
+		{
+			System.out.print("Input file: ");
+			String inputFileName = console.next();
+
+			System.out.print("Output file: ");
+			String outputFileName = console.next();
+
+			reader = new FileReader(inputFileName);
+
+			//if input name = output file name says file does not exist
+			if(!inputFileName.equals(outputFileName))
+			{
+				out = new PrintWriter(outputFileName);;
+			}
+
+			Scanner in = new Scanner(reader);
+
+			/*
+			 * while loop that will add lines from the input file to arraylist.
+			 */
+			while (in.hasNextLine())
+			{
+
+				String line = in.nextLine();
+				text.add(0, line);
+			}
+			/*
+			 * for loop that will print out to the output file
+			 */
+			for (int i = 0; i < text.size(); i++)
+			{
+
+				out.println(text.get(i));
+
+			}
+
+
+			reader.close();
+			in.close();
+			out.close();
+
+
+		} 
+		//handles file not found exception
+		catch (FileNotFoundException fnfe)
+		{
+			System.out.println("File or files not found");
+		}
+
+		// handles IO exception
+		catch (IOException ioe)
+		{
+			System.out.println("File not processed correctly");
+		} 
+
+		// handles Nullpointer exception
+		catch (NullPointerException npe)
+		{
+			System.out.println("Files names match.Try again.");
+		} 
+
+		//handles exception e.
+		catch (Exception e)
+		{
+		}
+
+	}
+
+}
+
+

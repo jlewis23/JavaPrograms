@@ -1,0 +1,120 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+
+/**     
+ *    
+ * @author Jeremy Lewis    
+ * @version 1.0  
+ * Course : ITEC 2150 Spring 2013    
+ * Written: March 4, 2013  
+ * Homework 5
+ * 
+ * This class will allow the user to enter,
+ * delete, and view current movies in a DVD catalog.
+ */
+
+// import ArrayList and JOptionPane packages
+
+public class VideoTest 
+{
+	// This method will use the array list to store the videoDescriptio input from the user
+	
+	// array list initialization
+	static ArrayList<VideoDescription> videos = new ArrayList<VideoDescription>();
+		
+	// static instances for use above
+	private static void addMovie()		
+	{
+		// Ask user to enter test movie title
+		String title =  JOptionPane.showInputDialog(null,"Enter a movie title");
+							
+		// Ask user to enter release date
+		String releaseDate =  JOptionPane.showInputDialog(null,"Enter " + title + "'s release date.");
+							
+		// Ask user to enter catalog number
+		String catalogNumb =  JOptionPane.showInputDialog(null,"Enter " + title + "'s catalog number (12345).");
+			
+		// Combines all data into one
+		VideoDescription video = new VideoDescription(title, releaseDate, catalogNumb);
+		 
+		// Adds video to array list
+		videos.add(video);
+	}
+	
+	// Static instance for showing movies
+	private static void viewMovies()
+	{
+		// shows the video description
+		System.out.println("Movie List");
+		
+		for(VideoDescription video: videos)
+		{
+			// Collects and prints out array logs
+			System.out.println(video.getTitle() +" was released in " + video.getReleaseDate() +". Its catalog number is " + video.getCatalogNumb() );
+		}
+	}
+	
+	private static void removeMovie()
+	{
+		// Removes a element of the array
+		String remove = JOptionPane.showInputDialog(null, "Which movie would you like to remove?(0,1,etc)");
+		
+		// variable remove converted to int
+		int remove1 = Integer.parseInt(remove);
+		
+		// removes video
+		videos.remove(remove1);
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException, Exception
+	{
+		// Scanner read in catalog file
+		Scanner in = new Scanner(new File("catalog.txt"));
+		
+		while (in.hasNextLine())
+		{
+        	 String title = in.next();
+        	 String releaseDate = in.next();
+        	 String catalogNumb = in.next();
+        	 VideoDescription videoz = new VideoDescription(title, releaseDate, catalogNumb);
+        	 videos.add(videoz);       
+		}
+		in.close();
+			
+		int input1;
+		
+		// Initialized do and while loop for restart of script
+		do{
+			
+		// JOptionpane to make first decision for catalog
+		String input = JOptionPane.showInputDialog(null,"Enter 1 to add a movie\n" +
+				"Enter 2 to show movie list\nEnter 3 to delete a movie\n" +
+				"Enter 4 to exit system");
+
+		// convert string to int
+		input1 = Integer.parseInt(input);
+
+		// If else statement to launch decisions
+		if (input1 == 1) 
+		{
+			addMovie();
+		}
+		else if (input1 == 2) 
+		{
+			viewMovies();
+		}
+		else if (input1 == 3) 
+		{
+			removeMovie();
+		}
+		// Exits the system
+		}while (input1 != 4);
+		JOptionPane.showMessageDialog(null, "Exiting System");
+		System.exit(0);
+	}	
+}
